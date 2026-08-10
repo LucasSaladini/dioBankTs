@@ -20,7 +20,7 @@ export const Card = ({ login }: ICard) => {
 
   useEffect(() => {
     const getData = async () => {
-      const data: any | IUserData = await api
+      const data: any | IUserData = await api()
       setUserData(data)
     }
 
@@ -38,6 +38,12 @@ export const Card = ({ login }: ICard) => {
       mx="auto" 
       mt={10}
     >
+      { 
+        userData === null || userData === undefined ?
+        <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">Loading...</Heading> 
+         :
+        <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">Informações carregadas</Heading> 
+        }
       <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">
         Faça o seu login
       </Heading>
