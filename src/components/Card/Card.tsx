@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Heading, Input, Stack, Text } from '@chakra-ui/react';
-import { DioButton } from './Button/Button';
-import { api } from '../api';
+import { DioButton } from '../Button/Button';
+import { api } from '../../api';
 
 interface ICard {
   login: (email: string) => void;
@@ -29,21 +29,18 @@ export const Card = ({ login }: ICard) => {
 
   return (
     <Box 
-      bg="#1A1828" 
       p={8} 
-      borderRadius="lg" 
-      boxShadow="lg" 
       maxW="400px" 
       w="100%" 
       mx="auto" 
       mt={10}
     >
-      { 
+      {/* { 
         userData === null || userData === undefined ?
         <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">Loading...</Heading> 
          :
         <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">Informações carregadas</Heading> 
-        }
+        } */}
       <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">
         Faça o seu login
       </Heading>

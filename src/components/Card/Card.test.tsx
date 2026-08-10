@@ -1,4 +1,4 @@
-import { login } from "../services/login";
+import { login } from "../../services/login";
 
 describe('Card Component', () => {
   const mockAlert = jest.fn()

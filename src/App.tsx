@@ -1,23 +1,22 @@
-import { 
-  ChakraProvider, 
-  defaultSystem,
-  Box,
-} from "@chakra-ui/react";
-import { Header } from "./components/Header/Header";
-import { Card } from "./components/Card";
-import { login } from "./services/login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Account } from "./pages/Account";
+import { Home } from "./pages/Home";
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { Layout } from "./components/Layout";
 
 function App() {
 
   return (
-    <ChakraProvider value={defaultSystem}>
-      <Box minH="100vh" bg="#1A1828">
-        <Header />
-        <Box p={4}>
-          <Card login={login} />
-        </Box>
-      </Box>
-    </ChakraProvider>
+    <BrowserRouter>
+      <ChakraProvider value={defaultSystem}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/account' element={<Account />} />
+          </Routes>
+        </Layout>
+      </ChakraProvider>
+    </BrowserRouter>
   );
 }
 
