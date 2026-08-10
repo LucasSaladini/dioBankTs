@@ -1,31 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box, Heading, Input, Stack, Text } from '@chakra-ui/react';
 import { DioButton } from '../Button/Button';
-import { api } from '../../api';
 
 interface ICard {
   login: (email: string) => void;
 }
 
-interface IUserData {
-  email: string
-  password: string
-  name: string
-}
-
 export const Card = ({ login }: ICard) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [userData, setUserData] = useState<null | IUserData>();
-
-  useEffect(() => {
-    const getData = async () => {
-      const data: any | IUserData = await api()
-      setUserData(data)
-    }
-
-    getData()
-  }, [])
 
   return (
     <Box 
@@ -35,12 +18,6 @@ export const Card = ({ login }: ICard) => {
       mx="auto" 
       mt={10}
     >
-      {/* { 
-        userData === null || userData === undefined ?
-        <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">Loading...</Heading> 
-         :
-        <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">Informações carregadas</Heading> 
-        } */}
       <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">
         Faça o seu login
       </Heading>
