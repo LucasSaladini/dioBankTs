@@ -1,8 +1,9 @@
 import { Center, SimpleGrid, Spinner } from "@chakra-ui/react"
 import { CardInfo } from "../components/CardInfo/CardInfo"
 import { api } from "../api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AppContext } from "../components/Context/AppContext";
 
 interface IUserData {
   email: string
@@ -14,6 +15,12 @@ interface IUserData {
 
 export const Account = () => {
   const [userData, setUserData] = useState<null | IUserData>();
+  
+  const { isLoggedIn } = useContext(AppContext)
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  !isLoggedIn && navigate('/')
 
   useEffect(() => {
     const getData = async () => {
@@ -25,10 +32,8 @@ export const Account = () => {
   }, [])
 
   const currentDate = new Date();
-  const { id } = useParams();
-  const navigate = useNavigate();
 
-  if(userData && id !== userData.id) {
+  if (userData && id !== userData.id) {
     navigate('/');
   }
 
@@ -44,8 +49,8 @@ export const Account = () => {
             ) :
             (
               <>
-                <CardInfo 
-                  mainContent={`Olá, ${userData?.name}`} 
+                <CardInfo
+                  mainContent={`Olá, ${userData?.name}`}
                   content={`
                     ${currentDate.getDay()}/${currentDate.getMonth()}/${currentDate.getFullYear()} 
                     ${currentDate.getHours()}:${currentDate.getMinutes()}`} />

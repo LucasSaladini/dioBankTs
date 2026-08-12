@@ -1,12 +1,54 @@
-import { Box } from "@chakra-ui/react";
+import { Text, Box, Input, Stack, Heading } from "@chakra-ui/react";
 import { Card } from "../components/Card/Card";
 import { login } from "../services/login";
+import { DioButton } from "../components/Button/Button";
+import { useState } from "react";
 
 export const Home = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   return (
     <Box minH="100vh" bg="#1A1828">
       <Box p={4}>
-        <Card login={login} />
+        <Card>
+          <Heading as="h2" size="md" color="#1DDFF4" mb={6} textAlign="center">
+            Faça o seu login
+          </Heading>
+          <Stack gap={4}>
+            <Box>
+              <Text color="#C6AEC9" mb={2} fontSize="sm" fontWeight="medium">
+                Email
+              </Text>
+              <Input
+                placeholder="email@dio.bank"
+                bg="#514477"
+                color="white"
+                border="none"
+                px={4}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                _placeholder={{ color: '#C6AEC9' }}
+              />
+            </Box>
+            <Box>
+              <Text color="#C6AEC9" mb={2} fontSize="sm" fontWeight="medium">
+                Senha
+              </Text>
+              <Input
+                type="password"
+                placeholder="********"
+                bg="#514477"
+                color="white"
+                border="none"
+                px={4}
+                _placeholder={{ color: '#C6AEC9' }}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Box>
+            <DioButton onClick={() => login(email)} />
+          </Stack>
+        </Card>
       </Box>
     </Box>
   )
