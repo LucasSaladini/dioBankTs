@@ -1,9 +1,8 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Account } from "./pages/Account";
-import { Home } from "./pages/Home";
+import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import { Layout } from "./components/Layout";
 import { AppContextProvider } from "./components/Context/AppContext";
+import { MainRoutes } from "./routes";
 
 function App() {
 
@@ -12,10 +11,7 @@ function App() {
       <AppContextProvider>
         <ChakraProvider value={defaultSystem}>
           <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path='/account/:id' element={<Account />} />
-            </Routes>
+            <MainRoutes />
           </Layout>
         </ChakraProvider>
       </AppContextProvider>

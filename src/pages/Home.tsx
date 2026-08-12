@@ -2,11 +2,27 @@ import { Text, Box, Input, Stack, Heading } from "@chakra-ui/react";
 import { Card } from "../components/Card/Card";
 import { login } from "../services/login";
 import { DioButton } from "../components/Button/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../components/Context/AppContext";
 
 export const Home = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { setIsLoggedIn } = useContext(AppContext);
+  const navigate = useNavigate()
+
+  const validateUser = async (email: string) => {
+    const loggedIn = await login(email)
+
+    if(!loggedIn) {
+      alert("E-mail inválido")
+      return
+    }
+
+    setIsLoggedIn(true)
+    navigate('/account/1')
+  }
 
   return (
     <Box minH="100vh" bg="#1A1828">
@@ -46,7 +62,7 @@ export const Home = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Box>
-            <DioButton onClick={() => login(email)} />
+            <DioButton onClick={() => validateUser(email)} />
           </Stack>
         </Card>
       </Box>

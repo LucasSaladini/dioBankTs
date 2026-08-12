@@ -1,29 +1,23 @@
 import { login } from "../services/login";
 
 describe('login service', () => {
-  const mockAlert = jest.fn();
-  const mockEmail = 'teste@dio.bank'
+  const mockEmail = 'teste@dio.bank';
 
-  beforeEach(() => {
-    window.alert = mockAlert;
-    mockAlert.mockClear();
+  it('Deve retornar true caso o e-mail seja válido', async () => {
+    const response = await login(mockEmail);
+
+    expect(response).toBeTruthy();
   });
 
-  it('Deve exibir um alert com a mensagem de boas-vindas ao clicar no botão caso o e-mail seja válido', async () => {
-    await login("teste@dio.bank");
+  it('Deve retornar false caso o e-mail esteja vazio', async () => {
+    const response = await login("");
 
-    expect(mockAlert).toHaveBeenCalledWith(`Boas-vindas ao DIO Bank, ${mockEmail}!`);
+    expect(response).toBeFalsy();
   });
 
-  it('Deve exibir um alert solicitando o preenchimento do email', async () => {
-    await login("");
+  it('Deve retornar false caso o e-mail seja inválido', async () => {
+    const response = await login('email@invalid.com');
 
-    expect(mockAlert).toHaveBeenCalledWith('Preencha o email');
+    expect(response).toBeFalsy();
   });
-
-  it('Deve exibir um erro caso o e-mail seja inválido', async () => {
-    await login('email@invalid.com');
-
-    expect(mockAlert).toHaveBeenCalledWith('E-mail inválido');
-  })
 });
