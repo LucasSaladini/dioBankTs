@@ -5,6 +5,7 @@ import { DioButton } from "../components/Button/Button";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../components/Context/AppContext";
+import { changeLocalStorage } from "../services/storage";
 
 export const Home = () => {
   const [email, setEmail] = useState<string>('');
@@ -21,6 +22,7 @@ export const Home = () => {
     }
 
     setIsLoggedIn(true)
+    changeLocalStorage({ login: true })
     navigate('/account/1')
   }
 
