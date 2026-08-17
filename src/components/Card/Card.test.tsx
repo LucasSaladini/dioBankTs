@@ -5,7 +5,7 @@ describe('Card Component', () => {
   window.alert = mockAlert
 
   it('Deve exibir um alert com a mensagem de boas-vindas ao clicar no botão', async () => {
-    const response = await login("teste@dio.bank")
+    const response = await login("teste@dio.bank", "123456")
 
     expect(response).toBeTruthy();
   });

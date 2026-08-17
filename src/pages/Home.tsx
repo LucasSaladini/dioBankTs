@@ -13,11 +13,11 @@ export const Home = () => {
   const { setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate()
 
-  const validateUser = async (email: string) => {
-    const loggedIn = await login(email)
+  const validateUser = async (email: string, password: string) => {
+    const loggedIn = await login(email, password)
 
     if(!loggedIn) {
-      alert("E-mail inválido")
+      alert("Não foi possível realizar o login. Dados informados incorretos.")
       return
     }
 
@@ -64,7 +64,7 @@ export const Home = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Box>
-            <DioButton onClick={() => validateUser(email)} />
+            <DioButton onClick={() => validateUser(email, password)} />
           </Stack>
         </Card>
       </Box>
